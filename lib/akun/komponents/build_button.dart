@@ -5,10 +5,16 @@ import 'package:flutter/material.dart';
 class BuildButton extends StatelessWidget {
   final String title;
   final Function press;
+  final IconData icon;
+  final Color icolor, bcolor, tcolor;
   const BuildButton({
     Key key,
     this.title,
     this.press,
+    this.icon,
+    this.icolor,
+    this.bcolor,
+    this.tcolor,
   }) : super(key: key);
 
   @override
@@ -20,15 +26,21 @@ class BuildButton extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child: ElevatedButton(
           onPressed: press,
-          child: Text(title,
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black.withRed(100))),
+          child: Row(
+            children: [
+              Icon(icon, color: icolor),
+              SizedBox(width: 10),
+              Text(title,
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: tcolor)),
+            ],
+          ),
           style: ElevatedButton.styleFrom(
               shadowColor: Colors.black.withRed(100),
               elevation: 2,
-              primary: Colors.white,
+              primary: bcolor,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5))),
         ),

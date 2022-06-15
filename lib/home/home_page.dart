@@ -1,9 +1,12 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, non_constant_identifier_names
 
+import 'dart:async';
 import 'dart:convert';
 
+import 'package:connectivity/connectivity.dart';
 import 'package:dimades_project/konstant.dart';
 import 'package:dimades_project/models/product.dart';
+import 'package:dimades_project/my_koneksi.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'komponents/category_page.dart';
@@ -52,6 +55,7 @@ class _HomePageState extends State<HomePage>
   final globalKey = GlobalKey<ScaffoldState>();
   final TextEditingController _controller = TextEditingController();
   bool _isSearching = false;
+  bool _isVisible = true;
 
   _HomePageState() {
     _controller.addListener(() {
@@ -70,24 +74,47 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
+    fetchProduct();
     _tabController = TabController(length: 2, vsync: this);
     _tabController.addListener(() {});
     _isSearching = false;
-    fetchProduct();
+    startLaunching();
   }
 
   Future<void> _refresh() {
     return fetchProduct().then((_kategori) {});
   }
 
+  startLaunching() async {
+    var duration = const Duration(seconds: 3);
+    return Timer(duration, () {
+      setState(() {
+        _isVisible = false;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: buildAppBar(context),
-      body: _isSearching || _controller.text != ""
-          ? SedangSearching(context)
-          : TidakSearching(),
-    );
+        appBar: buildAppBar(context),
+        body: Stack(
+          children: [
+            _isSearching || _controller.text != ""
+                ? SedangSearching(context)
+                : TidakSearching(),
+            Visibility(
+              visible: _isVisible,
+              child: Container(
+                height: size.height,
+                width: size.width,
+                color: Colors.white,
+                child: Center(child: CircularProgressIndicator()),
+              ),
+            ),
+          ],
+        ));
   }
 
   RefreshIndicator SedangSearching(BuildContext context) {

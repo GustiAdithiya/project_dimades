@@ -1,9 +1,11 @@
-// ignore_for_file: prefer_const_constructors, unrelated_type_equality_checks, non_constant_identifier_names, empty_catches
+// ignore_for_file: prefer_const_constructors, unrelated_type_equality_checks, non_constant_identifier_names, empty_catches, deprecated_member_use
 
 import 'package:dimades_project/detail/product_detail_page.dart';
 import 'package:dimades_project/konstant.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ItemList extends StatefulWidget {
   final int id, product_id;
@@ -34,6 +36,29 @@ class _ItemListState extends State<ItemList> {
       var response = await http.get(url);
       if (response.statusCode == 200) {}
     } catch (e) {}
+  }
+
+  String readTimestamp(int timestamp) {
+    var now = DateTime.now();
+    var format = DateFormat('HH:mm a');
+    var date = DateTime.fromMicrosecondsSinceEpoch(timestamp * 1000);
+    var diff = date.difference(now);
+    var time = '';
+
+    if (diff.inSeconds <= 0 ||
+        diff.inSeconds > 0 && diff.inMinutes == 0 ||
+        diff.inMinutes > 0 && diff.inHours == 0 ||
+        diff.inHours > 0 && diff.inDays == 0) {
+      time = format.format(date);
+    } else {
+      if (diff.inDays == 1) {
+        time = diff.inDays.toString() + 'DAY AGO';
+      } else {
+        time = diff.inDays.toString() + 'DAYS AGO';
+      }
+    }
+
+    return time;
   }
 
   @override
@@ -134,12 +159,34 @@ class _ItemListState extends State<ItemList> {
                                 fontSize: 16,
                               ),
                             ),
-                            Text("Create At : " + widget.create),
-                            Text("Update At : " + widget.update),
+                            Text("Create At : " +
+                                widget.create.substring(0, 10)),
+                            Text("Update At : " +
+                                widget.update.substring(0, 10)),
                           ],
                         ),
                       ),
                     ),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: Container(
+                    //     decoration: BoxDecoration(
+                    //       borderRadius: BorderRadius.circular(5),
+                    //       boxShadow: const [
+                    //         BoxShadow(
+                    //           color: Colors.white,
+                    //           spreadRadius: 1,
+                    //         )
+                    //       ],
+                    //     ),
+                    //     child: Icon(
+                    //       Icons.download,
+                    //       color: Colors.blue,
+                    //       size: 30,
+                    //     ),
+                    //   ),
+                    // ),
+
                     Visibility(
                       visible: widget.st == "0" ? true : false,
                       child: InkWell(
@@ -148,22 +195,10 @@ class _ItemListState extends State<ItemList> {
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(color: Colors.red),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.red,
-                                  spreadRadius: 1,
-                                )
-                              ],
-                            ),
-                            child: Icon(
-                              Icons.cancel_sharp,
-                              color: Colors.white,
-                              size: 30,
-                            ),
+                          child: Icon(
+                            Icons.close,
+                            color: Colors.red,
+                            size: 30,
                           ),
                         ),
                       ),

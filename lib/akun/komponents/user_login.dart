@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'dart:convert';
 
+import 'package:dimades_project/akun/komponents/ubah_password_page.dart';
 import 'package:dimades_project/konstant.dart';
 import 'package:dimades_project/landing_page.dart';
 import 'package:dimades_project/models/user.dart';
@@ -98,6 +99,7 @@ class _UserLoginState extends State<UserLogin> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Center(
       child: FutureBuilder<List<User>>(
           future: fetchUser(widget.userid),
@@ -109,61 +111,69 @@ class _UserLoginState extends State<UserLogin> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(5),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(5),
+                        topRight: Radius.circular(5),
+                      ),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 2,
+                          color: Colors.black.withRed(50).withOpacity(0.3),
+                          spreadRadius: 1,
                           blurRadius: 1,
-                          offset: Offset(0, 2),
+                          offset: Offset(0, 0),
                         ),
                       ],
                     ),
                     width: double.infinity,
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding:
+                          const EdgeInsets.only(bottom: 8, left: 8, right: 8),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
                             children: [
-                              Stack(
-                                children: <Widget>[
-                                  CircleAvatar(
-                                    radius: 30,
-                                    backgroundColor: Colors.black12,
-                                    child: ClipOval(
-                                      child: Icon(
-                                        Icons.person,
-                                        color: Colors.white,
-                                        size: 50,
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Stack(
+                                  children: <Widget>[
+                                    CircleAvatar(
+                                      radius: 30,
+                                      backgroundColor: Colors.black12,
+                                      child: ClipOval(
+                                        child: Icon(
+                                          Icons.person,
+                                          color: Colors.white,
+                                          size: 50,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Positioned(
-                                      bottom: 1,
-                                      right: 1,
-                                      child: InkWell(
-                                        onTap: () {},
-                                        child: Container(
-                                          height: 20,
-                                          width: 20,
-                                          child: Icon(
-                                            Icons.add_a_photo,
-                                            color: Colors.white,
-                                            size: 10,
+                                    Positioned(
+                                        bottom: 1,
+                                        right: 1,
+                                        child: InkWell(
+                                          onTap: () {},
+                                          child: Container(
+                                            height: 20,
+                                            width: 20,
+                                            child: Icon(
+                                              Icons.add_a_photo,
+                                              color: Colors.white,
+                                              size: 10,
+                                            ),
+                                            decoration: BoxDecoration(
+                                                color:
+                                                    Colors.black.withRed(100),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(30))),
                                           ),
-                                          decoration: BoxDecoration(
-                                              color: Colors.black.withRed(100),
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(30))),
-                                        ),
-                                      ))
-                                ],
+                                        ))
+                                  ],
+                                ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -186,26 +196,119 @@ class _UserLoginState extends State<UserLogin> {
                           ),
                           Align(
                               alignment: Alignment.centerRight,
-                              child: IconButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => EditPage(
-                                          id: widget.userid,
-                                          nama: snapshot.data[0].name,
-                                          alamat: snapshot.data[0].address,
-                                          telp: snapshot.data[0].telp,
-                                          instansi: snapshot.data[0].instansi,
-                                          email: snapshot.data[0].email,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => EditPage(
+                                            id: widget.userid,
+                                            nama: snapshot.data[0].name,
+                                            alamat: snapshot.data[0].address,
+                                            telp: snapshot.data[0].telp,
+                                            instansi: snapshot.data[0].instansi,
+                                            email: snapshot.data[0].email,
+                                          ),
                                         ),
-                                      ),
-                                    );
-                                  },
-                                  icon: Icon(
-                                    Icons.edit,
-                                    color: Colors.black.withRed(100),
-                                  )))
+                                      );
+                                    },
+                                    child: Icon(
+                                      Icons.edit,
+                                      color: Colors.black.withRed(100),
+                                    )),
+                              ))
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(5),
+                          bottomRight: Radius.circular(5),
+                        ),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withRed(50).withOpacity(0.3),
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                            offset: Offset(0, 1),
+                          ),
+                        ]),
+                    child: IntrinsicWidth(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Divider(
+                            thickness: 1,
+                            color: Colors.grey,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: SizedBox(
+                              width: size.width * 0.7,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "Alamat : ",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(snapshot.data[0].address),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Divider(
+                            thickness: 1,
+                            color: Colors.grey,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: SizedBox(
+                              width: size.width * 0.7,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "Phone : ",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(snapshot.data[0].telp),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Divider(
+                            thickness: 1,
+                            color: Colors.grey,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: SizedBox(
+                              width: size.width * 0.7,
+                              child: Row(
+                                children: [
+                                  Text("Instansi : ",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                  Text(snapshot.data[0].instansi),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Divider(
+                            thickness: 1,
+                            color: Colors.grey,
+                          ),
                         ],
                       ),
                     ),
@@ -214,7 +317,20 @@ class _UserLoginState extends State<UserLogin> {
                 SizedBox(height: 10),
                 BuildButton(
                   title: "Change Password",
-                  press: () {},
+                  press: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => UbahPasswordPage(
+                          id: widget.userid,
+                        ),
+                      ),
+                    );
+                  },
+                  icon: Icons.edit,
+                  icolor: Colors.black.withRed(100),
+                  bcolor: Colors.white,
+                  tcolor: Colors.black.withRed(100),
                 ),
                 SizedBox(height: 10),
                 BuildButton(
@@ -222,6 +338,10 @@ class _UserLoginState extends State<UserLogin> {
                   press: () {
                     _onAlertButtonsPressed(context);
                   },
+                  icon: Icons.logout,
+                  icolor: Colors.white,
+                  bcolor: Colors.black.withRed(100),
+                  tcolor: Colors.white,
                 ),
               ],
             );

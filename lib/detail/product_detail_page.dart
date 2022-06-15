@@ -77,7 +77,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     request.files.add(file);
   }
 
-  static bool cek = false;
+  String cek = "";
   _cek(String cid, String pid) async {
     var params = "/api/cek";
     var url = Uri.http(cUrl, params + "/" + cid + "&" + pid);
@@ -86,17 +86,17 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       if (res.statusCode == 200) {
         if (res.body == "OK") {
           setState(() {
-            cek = true;
+            cek = "true";
           });
         } else {
           setState(() {
-            cek = false;
+            cek = "false";
           });
         }
       }
     } catch (e) {
       setState(() {
-        cek = false;
+        cek = "false";
       });
     }
   }
@@ -258,7 +258,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     child: ElevatedButton(
                       onPressed: () {
                         if (login) {
-                          if (cek) {
+                          if (cek == "true") {
                             setState(() {
                               visible = !visible;
                             });
@@ -272,14 +272,20 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           );
                         }
                       },
-                      child: Text('Kontrak',
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white)),
+                      child: cek == ""
+                          ? Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: CircularProgressIndicator(),
+                            )
+                          : Text('Kontrak',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white)),
                       style: ElevatedButton.styleFrom(
-                          primary:
-                              cek ? Colors.black.withRed(100) : Colors.grey,
+                          primary: cek == "true"
+                              ? Colors.black.withRed(100)
+                              : Colors.grey,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(17))),
                     ),

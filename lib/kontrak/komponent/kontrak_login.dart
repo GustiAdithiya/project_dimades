@@ -109,57 +109,47 @@ class _KontrakLoginState extends State<KontrakLogin> {
                 );
               }
               return searchresult.isNotEmpty || _controller.text.isNotEmpty
-                  ? Stack(
-                      children: <Widget>[
-                        Container(
-                          color: Colors.white70,
-                          margin: EdgeInsets.only(top: 10),
-                          height: MediaQuery.of(context).size.height,
-                          width: double.infinity,
-                          child: ListView.builder(
-                              itemCount: searchresult.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return ItemList(
-                                    id: snapshot.data[index].id,
-                                    product_id: searchresult[index].product_id,
-                                    path: searchresult[index].path,
-                                    create: searchresult[index].created_at,
-                                    update: searchresult[index].updated_at,
-                                    product: searchresult[index].product,
-                                    st: searchresult[index].status.toString(),
-                                    image: searchresult[index].image,
-                                    description:
-                                        searchresult[index].description,
-                                    mitra: searchresult[index].mitra);
-                              }),
-                        ),
-                      ],
+                  ? Container(
+                      color: Colors.white70,
+                      margin: EdgeInsets.only(top: 10),
+                      height: MediaQuery.of(context).size.height,
+                      width: double.infinity,
+                      child: ListView.builder(
+                          itemCount: searchresult.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return ItemList(
+                                id: snapshot.data[index].id,
+                                product_id: searchresult[index].product_id,
+                                path: searchresult[index].path,
+                                create: searchresult[index].created_at,
+                                update: searchresult[index].updated_at,
+                                product: searchresult[index].product,
+                                st: searchresult[index].status.toString(),
+                                image: searchresult[index].image,
+                                description: searchresult[index].description,
+                                mitra: searchresult[index].mitra);
+                          }),
                     )
-                  : Stack(
-                      children: <Widget>[
-                        Container(
-                          color: Colors.white70,
-                          margin: EdgeInsets.only(top: 10),
-                          height: MediaQuery.of(context).size.height,
-                          width: double.infinity,
-                          child: ListView.builder(
-                              itemCount: snapshot.data.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return ItemList(
-                                    id: snapshot.data[index].id,
-                                    product_id: snapshot.data[index].product_id,
-                                    path: snapshot.data[index].path,
-                                    create: snapshot.data[index].created_at,
-                                    update: snapshot.data[index].updated_at,
-                                    product: snapshot.data[index].product,
-                                    st: snapshot.data[index].status.toString(),
-                                    image: snapshot.data[index].image,
-                                    description:
-                                        snapshot.data[index].description,
-                                    mitra: snapshot.data[index].mitra);
-                              }),
-                        ),
-                      ],
+                  : Container(
+                      color: Colors.white70,
+                      margin: EdgeInsets.only(top: 10),
+                      height: MediaQuery.of(context).size.height,
+                      width: double.infinity,
+                      child: ListView.builder(
+                          itemCount: snapshot.data.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return ItemList(
+                                id: snapshot.data[index].id,
+                                product_id: snapshot.data[index].product_id,
+                                path: snapshot.data[index].path,
+                                create: snapshot.data[index].created_at,
+                                update: snapshot.data[index].updated_at,
+                                product: snapshot.data[index].product,
+                                st: snapshot.data[index].status.toString(),
+                                image: snapshot.data[index].image,
+                                description: snapshot.data[index].description,
+                                mitra: snapshot.data[index].mitra);
+                          }),
                     );
             }),
       ),
