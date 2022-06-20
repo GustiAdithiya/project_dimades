@@ -33,7 +33,7 @@ class _RegisterPageState extends State<RegisterPage> {
       "name": name.text,
       "email": email.text,
       "password": pass.text,
-      "role": "1",
+      "role": "0",
       "address": address.text,
       "telp": telp.text,
       "instansi": instansi.text,
@@ -99,7 +99,6 @@ class _RegisterPageState extends State<RegisterPage> {
         body: SingleChildScrollView(
           // reverse: true,
           child: Container(
-              height: size.height,
               width: double.infinity,
               decoration: BoxDecoration(color: Colors.black.withRed(100)),
               child: Column(

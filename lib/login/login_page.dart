@@ -47,7 +47,6 @@ class _LoginPageState extends State<LoginPage> {
     var url = Uri.http(cUrl, params + "/" + email.text + "&" + pass.text);
     var res = await http.get(url);
     if (res.statusCode == 200) {
-      print(res.body);
       if (res.body == '"Failed"') {
         _showAlertDialog(context, "Login Failed");
         setState(() {

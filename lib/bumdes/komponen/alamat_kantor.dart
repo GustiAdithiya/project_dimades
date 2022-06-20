@@ -142,14 +142,6 @@ class AlamatKantor extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          final Uri params = Uri(
-                            scheme: 'mailto',
-                            path: 'email@example.com',
-                            query:
-                                'subject=App Feedback&body=App Version 3.23', //add subject and body here
-                          );
-
-                          var url = params.toString();
                           _launchURL('mailto:bumdesapastibisa@gmail.com');
                         },
                         child: Text(

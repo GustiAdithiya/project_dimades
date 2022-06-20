@@ -2,11 +2,8 @@
 
 import 'dart:async';
 import 'dart:convert';
-
-import 'package:connectivity/connectivity.dart';
 import 'package:dimades_project/konstant.dart';
 import 'package:dimades_project/models/product.dart';
-import 'package:dimades_project/my_koneksi.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'komponents/category_page.dart';

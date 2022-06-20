@@ -1,3 +1,4 @@
+import 'package:dimades_project/change_ip.dart';
 import 'package:flutter/material.dart';
 import 'launcher.dart';
 
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp( 
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'DIMADES',
       theme: ThemeData(

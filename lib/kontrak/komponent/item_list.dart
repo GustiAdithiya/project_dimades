@@ -5,7 +5,6 @@ import 'package:dimades_project/konstant.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ItemList extends StatefulWidget {
   final int id, product_id;
